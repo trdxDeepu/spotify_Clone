@@ -3,7 +3,7 @@ let songIndex = 0;
 
 let audioElement = new Audio("songs/kaisa ye isq hai.mp3");
 let masterPlay = document.getElementById("masterPlay");
-let myProgressBar = document.getElementById("myprogressBar");
+let myProgressBar = document.getElementById("myProgressBar");
 let playingGif = document.getElementById("playingGif");
 let song = [
   {
@@ -79,8 +79,25 @@ masterPlay.addEventListener("click", () => {
 
 
 audioElement.addEventListener("timeupdate", () => {
-  console.log("timeupdate");
-  progress = parseInt((audioElement.currentTime/audioElement.duration)*100)
-  console.log(progress);
-  myProgressBar.value = progress;
+    console.log("Current Time:", audioElement.currentTime);
+    console.log("Duration:", audioElement.duration);
+    
+    let progress = parseInt((audioElement.currentTime/audioElement.duration)*100);
+    console.log("Calculated Progress:", progress);
+    
+    myProgressBar.value = progress;
+});
+
+
+myProgressBar.addEventListener('click', function(e) {
+    // Calculate the clicked position relative to the start of the progress bar
+    let clickPosition = e.clientX - this.getBoundingClientRect().left;
+     // Calculate the width of the progress bar
+    let progressBarWidth = this.offsetWidth;
+    // Calculate the click position as a percentage of the total width
+    let clickPercentage = clickPosition / progressBarWidth;
+    // Calculate the corresponding time in the audio
+    let audioDurationTime = clickPercentage * audioElement.duration;
+    // Set the audio's current time to the calculated time
+    audioElement.currentTime = audioDurationTime;
 });
