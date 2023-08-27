@@ -70,7 +70,6 @@ nav ul li{
 
  #myProgressBar{
   width: 80vw;
-  cursor: pointer;
 
  }
  .songItemContainer{
@@ -87,11 +86,17 @@ nav ul li{
   justify-content: space-around;
   align-items: center;
   border-radius: 34px;
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
   .songItem img{
-    width: 43px;
+    width: 42px;
     margin: 0px 23px;
     border-radius: 34px;
+}
+.songItem:hover {
+  background-color: #f2f2f2;
+  transform: translateY(-3px);  /* Lifts the item up slightly on hover */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Provides a subtle shadow beneath the item on hover */
 }
 
 .timestamp{
@@ -110,5 +115,5 @@ nav ul li{
 
 .songInfo img{
   opacity: 0;
-  transition: opacity .4s ease-in-out;
+  transition: opacity 1s ease-in;
 }

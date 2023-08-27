@@ -9,33 +9,33 @@ let song = [
   {
     songName: "Kaisa ye Isq hai",
     filePath: "songs/kaisa ye isq hai.mp3",
-    coverPath: "covers/kaisa.jpg",
+    coverPath: "covers/Kaisa ye Isq hai.jpg",
   },
   {
     songName: "Hale E Dil",
     filePath: "songs/Hale e Dil.mp3",
-    coverPath: "covers/kaisa.jpg",
+    coverPath: "covers/Hale E Dil.jpg",
   },
   {
     songName: "Tujhe Sochta Hoon",
     filePath: "songs/Tujhe Sochta Hoon (128 kbps).mp3",
-    coverPath: "covers/kaisa.jpg",
+    coverPath: "covers/Tujhe Sochta Hoon.jpg",
   },
   {
     songName: "Tu Hi Haqeeqat",
     filePath: "songs/Tu Hi Haqeeqat.mp3",
-    coverPath: "covers/kaisa.jpg",
+    coverPath: "covers/Tu Hi Haqeeqat.jpg",
   },
   {
     songName: "DIL TO BACHCHA HAI ",
     filePath: "songs/DIL TO BACHCHA HAI.mp3",
-    coverPath: "covers/kaisa.jpg",
+    coverPath: "covers/DIL TO BACHCHA HAI.jpg",
   },
   {
     songName: " Tere Hawaale",
     filePath:
       "songs/Tere Hawaale (Full Video) Laal Singh Chaddha _ Aamir,Kareena _ Arijit,Shilpa _ Pritam,Amitabh,Advait (128 kbps).mp3",
-    coverPath: "covers/kaisa.jpg",
+    coverPath: "covers/Tere Hawaale.jpg",
   },
   {
     songName: "Tune Jo Na Kaha",
@@ -43,19 +43,19 @@ let song = [
     coverPath: "covers/kaisa.jpg",
   },
   {
-    songName: "Kaisa ye Isq hai",
-    filePath: "songs/kaisa ye isq hai.mp3",
-    coverPath: "covers/kaisa.jpg",
+    songName: "Dil Ibaadat",
+    filePath: "songs/Dil Ibaadat.mp3",
+    coverPath: "covers/Tune Jo Na Kaha.jpg",
   },
   {
-    songName: "Kaisa ye Isq hai",
-    filePath: "songs/kaisa ye isq hai.mp3",
-    coverPath: "covers/kaisa.jpg",
+    songName: "Zindagi Bata De ",
+    filePath: "songs/Zindagi Bata De.mp3",
+    coverPath: "covers/Zindagi Bata De.jpg",
   },
   {
     songName: "Tera mera Rishta",
     filePath: "songs/Tera mera Rishta.mp3",
-    coverPath: "covers/kaisa.jpg",
+    coverPath: "covers/Tera mera Rishta.jpg",
   },
 ];
 
