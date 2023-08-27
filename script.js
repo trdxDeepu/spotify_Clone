@@ -1,103 +1,136 @@
 console.log("Welcome to spotify");
 let songIndex = 0;
 
-let audioElement = new Audio("songs/kaisa ye isq hai.mp3");
+let audioElement = new Audio("songs/1.mp3");
 let masterPlay = document.getElementById("masterPlay");
 let myProgressBar = document.getElementById("myProgressBar");
 let playingGif = document.getElementById("playingGif");
-let song = [
+let songItems = Array.from(document.getElementsByClassName("songItem"));
+let masterSongName = document.getElementById("masterSongName");
+let songs = [
   {
-    songName: "Kaisa ye Isq hai",
-    filePath: "songs/kaisa ye isq hai.mp3",
-    coverPath: "covers/Kaisa ye Isq hai.jpg",
+    songName: "Dil Ibaadat",
+    filePath: "songs/1.mp3",
+    coverPath: "covers/Tu Hi Haqeeqat.jpg",
   },
   {
     songName: "Hale E Dil",
-    filePath: "songs/Hale e Dil.mp3",
+    filePath: "songs/.mp3",
     coverPath: "covers/Hale E Dil.jpg",
   },
   {
     songName: "Tujhe Sochta Hoon",
-    filePath: "songs/Tujhe Sochta Hoon (128 kbps).mp3",
+    filePath: "songs/3.mp3",
     coverPath: "covers/Tujhe Sochta Hoon.jpg",
   },
   {
     songName: "Tu Hi Haqeeqat",
-    filePath: "songs/Tu Hi Haqeeqat.mp3",
+    filePath: "songs/4.mp3",
     coverPath: "covers/Tu Hi Haqeeqat.jpg",
   },
   {
     songName: "DIL TO BACHCHA HAI ",
-    filePath: "songs/DIL TO BACHCHA HAI.mp3",
+    filePath: "songs/5.mp3",
     coverPath: "covers/DIL TO BACHCHA HAI.jpg",
   },
   {
     songName: " Tere Hawaale",
     filePath:
-      "songs/Tere Hawaale (Full Video) Laal Singh Chaddha _ Aamir,Kareena _ Arijit,Shilpa _ Pritam,Amitabh,Advait (128 kbps).mp3",
+      "songs/6.mp3",
     coverPath: "covers/Tere Hawaale.jpg",
   },
   {
     songName: "Tune Jo Na Kaha",
-    filePath: "songs/Tune Jo Na Kaha (128 kbps).mp3",
+    filePath: "songs/7.mp3",
     coverPath: "covers/kaisa.jpg",
   },
   {
     songName: "Dil Ibaadat",
-    filePath: "songs/Dil Ibaadat.mp3",
+    filePath: "songs/8.mp3",
     coverPath: "covers/Tune Jo Na Kaha.jpg",
   },
   {
     songName: "Zindagi Bata De ",
-    filePath: "songs/Zindagi Bata De.mp3",
+    filePath: "songs/9.mp3",
     coverPath: "covers/Zindagi Bata De.jpg",
   },
   {
     songName: "Tera mera Rishta",
-    filePath: "songs/Tera mera Rishta.mp3",
+    filePath: "songs/10.mp3",
     coverPath: "covers/Tera mera Rishta.jpg",
   },
 ];
 
-// audioElement.play();
+songItems.forEach((element, i) => {
+  console.log(element, i);
+  element.getElementsByTagName("img")[0].src = songs[i].coverPath;
+  element.getElementsByClassName("songName")[0].innerText = songs[i].songName;
+});
 
 masterPlay.addEventListener("click", () => {
   if (audioElement.paused || audioElement.currentTime <= 0) {
     audioElement.play();
     masterPlay.classList.remove("fa-play-circle");
     masterPlay.classList.add("fa-pause-circle");
-    playingGif.style.opacity = 1 
+    playingGif.style.opacity = 1;
     console.log("working");
   } else {
     audioElement.pause();
     masterPlay.classList.add("fa-play-circle");
     masterPlay.classList.remove("fa-pause-circle");
-    playingGif.style.opacity = 0
+    playingGif.style.opacity = 0;
   }
 });
 
-
-
 audioElement.addEventListener("timeupdate", () => {
-    console.log("Current Time:", audioElement.currentTime);
-    console.log("Duration:", audioElement.duration);
-    
-    let progress = parseInt((audioElement.currentTime/audioElement.duration)*100);
-    console.log("Calculated Progress:", progress);
-    
-    myProgressBar.value = progress;
+  let progress = parseInt(
+    (audioElement.currentTime / audioElement.duration) * 100
+  );
+
+  myProgressBar.value = progress;
 });
 
-
-myProgressBar.addEventListener('click', function(e) {
-    // Calculate the clicked position relative to the start of the progress bar
-    let clickPosition = e.clientX - this.getBoundingClientRect().left;
-     // Calculate the width of the progress bar
-    let progressBarWidth = this.offsetWidth;
-    // Calculate the click position as a percentage of the total width
-    let clickPercentage = clickPosition / progressBarWidth;
-    // Calculate the corresponding time in the audio
-    let audioDurationTime = clickPercentage * audioElement.duration;
-    // Set the audio's current time to the calculated time
-    audioElement.currentTime = audioDurationTime;
+myProgressBar.addEventListener("click", function (e) {
+  // Calculate the clicked position relative to the start of the progress bar
+  let clickPosition = e.clientX - this.getBoundingClientRect().left;
+  // Calculate the width of the progress bar
+  let progressBarWidth = this.offsetWidth;
+  // Calculate the click position as a percentage of the total width
+  let clickPercentage = clickPosition / progressBarWidth;
+  // Calculate the corresponding time in the audio
+  let audioDurationTime = clickPercentage * audioElement.duration;
+  // Set the audio's current time to the calculated time
+  audioElement.currentTime = audioDurationTime;
 });
+
+const makeAllPlays = () => {
+  Array.from(document.getElementsByClassName("songItemPlay")).forEach(
+    (element) => {
+      element.classList.remove("fa-pause-circle");
+      element.classList.add("fa-play-circle");
+    }
+  );
+};
+
+Array.from(document.getElementsByClassName("songItemPlay")).forEach(
+  (element) => {
+    element.addEventListener("click", (e) => {
+      console.log(e.target);
+      makeAllPlays();
+      songIndex = parseInt(e.target.id);
+      e.target.classList.remove("fa-play-circle");
+      e.target.classList.add("fa-pause-circle");
+      audioElement.src = `songs/${songIndex + 1}.mp3`;
+      masterSongName.innerText = songs[songIndex].songName;
+      audioElement.currentTime = 0;
+      audioElement.play();
+      playingGif.style.opacity = 1;
+      masterPlay.classList.remove("fa-play-circle");
+      masterPlay.classList.add("fa-pause-circle");
+    });
+  }
+);
+
+document.getElementById('previous').addEventListener('click',()=>{
+  songIndex += 1 
+})
