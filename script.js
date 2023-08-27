@@ -14,50 +14,49 @@ let songs = [
     coverPath: "covers/Tu Hi Haqeeqat.jpg",
   },
   {
-    songName: "Hale E Dil",
-    filePath: "songs/.mp3",
-    coverPath: "covers/Hale E Dil.jpg",
-  },
-  {
-    songName: "Tujhe Sochta Hoon",
-    filePath: "songs/3.mp3",
-    coverPath: "covers/Tujhe Sochta Hoon.jpg",
-  },
-  {
-    songName: "Tu Hi Haqeeqat",
-    filePath: "songs/4.mp3",
-    coverPath: "covers/Tu Hi Haqeeqat.jpg",
-  },
-  {
-    songName: "DIL TO BACHCHA HAI ",
-    filePath: "songs/5.mp3",
+    songName: "Dil to Bachcha hai ",
+    filePath: "songs/2.mp3",
     coverPath: "covers/DIL TO BACHCHA HAI.jpg",
   },
   {
+    songName: "Hal E Dil",
+    filePath: "songs/3.mp3",
+    coverPath: "covers/Hale E Dil.jpg",
+  },
+  {
+    songName: "Kaise E Isq hai",
+    filePath: "songs/4.mp3",
+    coverPath: "covers/Kaisa ye Isq hai.jpg",
+  },
+  {
+    songName: "Tera Mera Rishta",
+    filePath: "songs/5.mp3",
+    coverPath: "covers/Tera mera Rishta.jpg",
+  },
+  {
     songName: " Tere Hawaale",
-    filePath:
-      "songs/6.mp3",
+    filePath: "songs/6.mp3",
     coverPath: "covers/Tere Hawaale.jpg",
   },
   {
     songName: "Tune Jo Na Kaha",
-    filePath: "songs/7.mp3",
-    coverPath: "covers/kaisa.jpg",
+    filePath: "songs/8.mp3",
+    coverPath: "covers/Tujhe Sochta Hoon.jpg",
   },
   {
-    songName: "Dil Ibaadat",
+    songName: "Tujhe Sochta Hoon",
     filePath: "songs/8.mp3",
+    coverPath: "covers/Tujhe Sochta Hoon.jpg",
+  },
+  {
+    songName: "Tune Jo Na Kaha ",
+    filePath: "songs/9.mp3",
     coverPath: "covers/Tune Jo Na Kaha.jpg",
   },
   {
-    songName: "Zindagi Bata De ",
-    filePath: "songs/9.mp3",
-    coverPath: "covers/Zindagi Bata De.jpg",
-  },
-  {
-    songName: "Tera mera Rishta",
+    songName: "Zindagi Bta De",
     filePath: "songs/10.mp3",
-    coverPath: "covers/Tera mera Rishta.jpg",
+    coverPath: "covers/Zindagi Bata De.jpg",
   },
 ];
 
@@ -103,34 +102,71 @@ myProgressBar.addEventListener("click", function (e) {
   audioElement.currentTime = audioDurationTime;
 });
 
-const makeAllPlays = () => {
-  Array.from(document.getElementsByClassName("songItemPlay")).forEach(
-    (element) => {
-      element.classList.remove("fa-pause-circle");
-      element.classList.add("fa-play-circle");
-    }
-  );
-};
-
 Array.from(document.getElementsByClassName("songItemPlay")).forEach(
   (element) => {
     element.addEventListener("click", (e) => {
-      console.log(e.target);
-      makeAllPlays();
-      songIndex = parseInt(e.target.id);
-      e.target.classList.remove("fa-play-circle");
-      e.target.classList.add("fa-pause-circle");
-      audioElement.src = `songs/${songIndex + 1}.mp3`;
-      masterSongName.innerText = songs[songIndex].songName;
-      audioElement.currentTime = 0;
-      audioElement.play();
-      playingGif.style.opacity = 1;
-      masterPlay.classList.remove("fa-play-circle");
-      masterPlay.classList.add("fa-pause-circle");
+      let isPlaying = e.target.classList.contains("fa-pause-circle");
+
+      if (isPlaying) {
+        audioElement.pause();
+        e.target.classList.remove("fa-pause-circle");
+        e.target.classList.add("fa-play-circle");
+        masterPlay.classList.remove("fa-pause-circle");
+        masterPlay.classList.add("fa-play-circle");
+        playingGif.style.opacity = 0;
+      } else {
+        makeAllPlays();
+
+        songIndex = parseInt(e.target.id);
+        e.target.classList.remove("fa-play-circle");
+        e.target.classList.add("fa-pause-circle");
+        audioElement.src = `songs/${songIndex + 1}.mp3`;
+        masterSongName.innerText = songs[songIndex].songName;
+        audioElement.currentTime = 0;
+        audioElement.play();
+        playingGif.style.opacity = 1;
+        masterPlay.classList.remove("fa-play-circle");
+        masterPlay.classList.add("fa-pause-circle");
+      }
     });
   }
 );
 
-document.getElementById('previous').addEventListener('click',()=>{
-  songIndex += 1 
-})
+// Optional: a function that sets all songs to the play state (assuming you have such a function)
+function makeAllPlays() {
+  let allSongs = document.getElementsByClassName("songItemPlay");
+  for (let song of allSongs) {
+    song.classList.remove("fa-pause-circle");
+    song.classList.add("fa-play-circle");
+  }
+}
+
+document.getElementById("previous").addEventListener("click", () => {
+  if (songIndex <= 0) {
+    songIndex = 0;
+  } else {
+    songIndex -= 1;
+  }
+  audioElement.src = `songs/${songIndex + 1}.mp3`;
+  masterSongName.innerText = songs[songIndex].songName;
+  audioElement.currentTime = 0;
+  audioElement.play();
+  playingGif.style.opacity = 1;
+  masterPlay.classList.remove("fa-play-circle");
+  masterPlay.classList.add("fa-pause-circle");
+});
+
+document.getElementById("next").addEventListener("click", () => {
+  if (songIndex >= 9) {
+    songIndex = 0;
+  } else {
+    songIndex += 1;
+  }
+  audioElement.src = `songs/${songIndex + 1}.mp3`;
+  masterSongName.innerText = songs[songIndex].songName;
+  audioElement.currentTime = 0;
+  audioElement.play();
+  playingGif.style.opacity = 1;
+  masterPlay.classList.remove("fa-play-circle");
+  masterPlay.classList.add("fa-pause-circle");
+});
