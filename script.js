@@ -113,7 +113,7 @@ Array.from(document.getElementsByClassName("songItemPlay")).forEach(
         e.target.classList.add("fa-play-circle");
         masterPlay.classList.remove("fa-pause-circle");
         masterPlay.classList.add("fa-play-circle");
-        
+        playingGif.style.opacity = 0;
       } else {
         makeAllPlays();
 
